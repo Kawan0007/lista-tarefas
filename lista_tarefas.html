@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="geral">
+        <h1>Lista de Tarefas</h1>
+        <input type="text" placeholder="digite sua tarefas" id="input-tarefas">
+        <button id="botao">Adicionar</button>
+        <div id="tarefas"></div>
+    </div>
+    <script>
+        let botaoadd = document.getElementById('botao');
+        let input = document.getElementById('input-tarefas');
+        let tarefas = document.getElementById('tarefas');
+        
+        botaoadd.addEventListener('click', function() {
+            if (input.value.trim() !== '') {  // Garante que não adicione tarefa vazia
+                var tarefa = document.createElement('p'); // Cria um elemento <p> para a tarefa
+                tarefa.innerText = input.value;  // Atribui o texto do input à tarefa
+                tarefas.appendChild(tarefa);  // Adiciona a tarefa ao div de tarefas
+                input.value = '';  // Limpa o campo de input após adicionar
+
+                let marcado = false;  // Variável específica para cada tarefa
+
+                tarefa.addEventListener('click', function() {
+                    if (!marcado) {
+                        tarefa.style.textDecoration = 'line-through';  // Risca a tarefa ao clicar 
+                        marcado = true;
+                    } else {
+                        tarefa.style.textDecoration = '';  
+                        marcado = false;
+                    }
+                });
+
+                tarefa.addEventListener('dblclick', function() {
+                    tarefas.removeChild(tarefa);  // Comando de duplo click para remover  
+                
+                });
+            }
+        });
+    </script>
+</body>
+</html>
